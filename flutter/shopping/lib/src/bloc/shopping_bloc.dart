@@ -2,28 +2,36 @@ import 'dart:async';
 
 import 'package:shopping/src/bloc/bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shopping/src/helpers/api_helper.dart';
+import 'package:shopping/src/model/book.dart';
 
 class ShoppingBloc implements Bloc {
 
   //step1 - stream
-  final _item = PublishSubject<int>();
+  final _apiHelpers = ApiHelper();
+  final _items = PublishSubject<List<Book>>();
   final _stringItem = PublishSubject<String>();
 
   //step2 - listen
-  Stream<int> get item => _item.stream;
-  Stream<String> get stringItem => _stringItem.stream;
+  Stream<List<Book>> get items => _items.stream;
+//  Stream<String> get stringItem => _stringItem.stream;
 
   //step3 emit
-  Function(int) get emitItem => _item.sink.add;
+  Function(List<Book>) get emitItem => _items.sink.add;
 
 
   ShoppingBloc() {
-    _item.stream.transform(_stringTransformer()).pipe(_stringItem);
+//    _items.stream.transform(_stringTransformer()).pipe(_stringItem);
+  }
+
+  fetchItems() async {
+    List<Book> list = await _apiHelpers.fetchAllItems();
+    _items.sink.add(list);
   }
 
   @override
   void dispose() {
-    _item.close();
+    _items.close();
     _stringItem.close();
   }
 

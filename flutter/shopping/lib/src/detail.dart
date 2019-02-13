@@ -9,7 +9,30 @@ class Detail extends StatelessWidget{
     print('detail : $bloc');
     return Scaffold(
       appBar: AppBar(),
-      body: Text('detail'),
+      body: SafeArea(child:
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+
+//                width: double.maxFinite,
+                color: Colors.yellow,
+              ),
+//              fit: FlexFit.loose,
+            flex: 2,
+            ),
+            Expanded(
+              child: Container(
+//                width: double.maxFinite,
+//                height: double.maxFinite,
+                color: Colors.red,
+              ),
+              flex: 8,
+            )
+          ],
+        )
+      ),
     );
   }
 }

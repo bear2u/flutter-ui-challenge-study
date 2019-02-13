@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui_exam1/login_form_widget.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,36 +18,14 @@ class _LoginState extends State<Login> {
             child: Center(
               child: Image.asset(
                 "asset/images/logo.png",
-                width: 150.0,
+                width: MediaQuery.of(context).size.width / 2,
                 fit: BoxFit.fitWidth,
               ),
             ),
             flex: 3,
           ),
           Expanded(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 16.0, right: 16.0, bottom: 100.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Username'),
-                    ),
-                    TextField(
-                        decoration: InputDecoration(labelText: 'Password'),
-                        obscureText: true),
-                    RaisedButton(
-                      onPressed: () {},
-                      child: Text('SIGN IN'),
-                    ),
-                    Text('SIGN UP FOR AN ACCOUNT'),
-                  ],
-                ),
-              ),
-            ),
+            child: LoginWidget(),
             flex: 7,
           ),
         ],
